@@ -8,6 +8,7 @@ function UserDetails(){
     const {name} = useParams()
     const [userdetails,setUserDetails] = useState([{}])
     const token = localStorage.getItem("token")
+    const [follow, following] = useState("")
 
     useEffect(()=>{
         fetch(`${HOST}/users/in/${name}/`,{
@@ -17,11 +18,40 @@ function UserDetails(){
                 "Authorization": `Token ${token}`
             }
         }).then(resp => resp.json())
-        .then(resp => setUserDetails(resp))
+        .then(resp =>{
+            setUserDetails(resp)
+            following(resp.follow)
+        })
         .then(err => console.log(err))
 
     },[])
-    console.log(userdetails)
+
+
+    const followp = name
+    const [redirect, setRedirect] = useState(false)
+
+    console.log(followp)
+    const submit = async(e) => {
+        e.preventDefault();
+        let method = "DELETE"
+        if (follow=="Follow") { method="POST" }
+
+        const response = await fetch(`${HOST}/users/follow/`,{
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+            },
+            body:JSON.stringify({
+                followp
+            })
+        })
+        setRedirect(true)
+        const content = await response.json()
+        console.log(content)
+        following(follow=="Follow" ? "Following" : "Follow" )
+    }
+
 
     return(
         <div>
@@ -51,6 +81,12 @@ function UserDetails(){
                     {userdetails.inv ? "Investor, " : "" }
                 </ListGroup.Item>
                 </Col>
+                <form onSubmit={submit}>
+                    {follow=="Edit Profile" 
+                    ? <Button href={`/edit/${userdetails.username}`} type="submit">{follow}</Button>
+                    : <Button type="submit">{follow}</Button>}
+                </form>
+
             </Row>
         
 

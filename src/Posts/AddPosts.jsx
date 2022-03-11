@@ -24,10 +24,11 @@ function AddPost(props){
     const [redirect, setRedirect] = useState(false)
     const [hashtags, setHashtags] = useState([])
     const token = localStorage.getItem("token")
-    const {catagory} = useParams() // catagory
+    const {catagory} = useParams()
+    const [cover, setCever] = useState("")
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/hashtag/tag/',{
+        fetch(`${HOST}/hashtag/tag/`,{
           method:"GET",
           headers: {
             "Content-Type": "application/json",
@@ -39,32 +40,8 @@ function AddPost(props){
       .catch(error => console.log(error))
     },[])
 
-    console.log(hashtags)
-
-    console.log(HOST+"/posts/"+catagory)
-
-    console.log(
-        title,
-        shrtdesc,
-        desc,
-        hashtag,
-        catagory
-    )
-
-    const [ cover, setCever ] = useState("");
-    console.log("cover",cover)
-
     const submit = async (e) => {
         e.preventDefault();
-
-
-        console.log(
-            title,
-            shrtdesc,
-            desc,
-            hashtag,
-            catagory,
-        )
 
         const response = await fetch(`${HOST}/posts/`,{
             method:"POST",

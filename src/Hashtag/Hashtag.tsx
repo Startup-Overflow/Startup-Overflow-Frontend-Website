@@ -1,6 +1,7 @@
 import { useState, SyntheticEvent } from "react";
 import { Navigate } from "react-router-dom";
 import MyNavbar from "../components/MyNavbar";
+import HOST from "../Hosts";
 import Tags from "./Tags";
 
 function Hashtag(){
@@ -11,7 +12,7 @@ function Hashtag(){
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const send = await fetch('http://127.0.0.1:8000/hashtag/',{
+        const send = await fetch(`${HOST}/hashtag/`,{
             method:"POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,7 +29,7 @@ function Hashtag(){
         }
 
     if (redirect){
-        return <Navigate to="/login/"/>
+        return <Navigate to="/"/>
     }
 
     return(

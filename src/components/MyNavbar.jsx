@@ -29,8 +29,8 @@ const AddMenu = (props) => {
         <div>  
             <Navbar expand="lg">
                 <Navbar.Collapse className="justify-content-end">
-                    <Nav.Link href={props.postlink}>Add {props.post} </Nav.Link>
-                    <Nav.Link href={props.link}>{props.name}</Nav.Link>
+                    <Nav.Link href={props.postlink}>{props.post != "Followings" ? "Add "+props.post : ""  } </Nav.Link>
+                    <Nav.Link href={props.link}>My {props.name}s</Nav.Link>
                 </Navbar.Collapse>
             </Navbar>
         </div>
@@ -60,17 +60,22 @@ const UserMenu = () => {
     return (
         <div>
         <Nav>
-            {/* <Nav.Link href="">Messages</Nav.Link> */}
-            <Nav.Link href="">Notifications</Nav.Link>
-            <Nav.Link href="/view/followings">Followings</Nav.Link>
+            <Nav.Link href="/view/followings">Follows</Nav.Link>
             <Nav.Link href="/view/question">Questions</Nav.Link>
             {user.entre || user.mentor ?  <Nav.Link href="/view/plan">Plans</Nav.Link>: ""}
             {user.entre || user.inv ?  <Nav.Link href="/view/investment">Investment</Nav.Link>: "" }
-            <Nav.Link href="/Products">Products</Nav.Link>
+            {/* <Nav.Link href="/Products">Products</Nav.Link> */}
             <NavDropdown title={user.user} id="basic-nav-dropdown">
+                {/* <NavDropdown.Item href="">Messages</NavDropdown.Item> */}
+                <NavDropdown.Item href="/noti">Notifications</NavDropdown.Item>
+                <NavDropdown.Item href="/following">Followings</NavDropdown.Item>
+                
+                <NavDropdown.Divider />
+
                 <NavDropdown.Item href={`/user/${user.user}`}>View Profile</NavDropdown.Item>
                 <NavDropdown.Item href={`/edit/${user.user}`}>Edit Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
+
                 <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
             </NavDropdown>
         </Nav>

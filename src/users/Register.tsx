@@ -2,6 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import { Container, Card } from "react-bootstrap";
 import {Navigate} from 'react-router-dom';
 import MyNavbar from "../components/MyNavbar";
+import HOST from "../Hosts";
 
 const Register = () => {
     const [first_name, setFirstName] = useState('');
@@ -16,7 +17,7 @@ const Register = () => {
         e.preventDefault();
 
         if (password===confirm_password){
-            const response = await fetch('http://127.0.0.1:8000/users/register/',{
+            const response = await fetch(`${HOST}/users/register/`,{
               method:"POST",
               headers: {"Content-Type": "application/json"},
               body:JSON.stringify({

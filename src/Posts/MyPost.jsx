@@ -37,26 +37,12 @@ function Post(props){
 }
 
 function MyPosts(props){
-  const [posts, setPosts] = useState([])
   const [tagPosts, setTagPosts] = useState([])
   const {id} = useParams()
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    fetch(`${HOST}/posts/articles`,{
-      method:"GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Token ${token}`
-      }
-  })
-  .then(resp => resp.json())
-  .then(resp => setPosts(resp))
-  .catch(error => console.log(error))
-  },[])
-
-  useEffect(() => {
-    fetch(`${HOST}/posts/tag/${id}`,{
+    fetch(`${HOST}/posts/mypost/${id}`,{
       method:"GET",
       headers: {
         "Content-Type": "application/json",
@@ -68,8 +54,6 @@ function MyPosts(props){
   .catch(error => console.log(error))
   },[])
 
-
-  console.log(posts==0)
   console.log(tagPosts)
 
   return (
@@ -77,15 +61,13 @@ function MyPosts(props){
       {(tagPosts==0 && id!="followings") ? 
         <h4>No {id.charAt(0).toUpperCase()+id.slice(1)} Found. </h4> : 
         tagPosts.map(post=><Post key={post.id} id={post.id} title={post.title} desc={post.short_desc} attachment={HOST+post.attachment} tags={post.hashtag}/>)}
-      {id=="followings"? 
-        posts.map(post=><Post key={post.id} id={post.id} title={post.title} desc={post.short_desc} attachment={HOST+post.attachment} tags={post.hashtag}/>) : ""}
     </Container>
   );
 }
 
 
 
-function Posts(props) {
+function MePosted(props) {
   const token = localStorage.getItem("token")
   console.log(token)
   localStorage.setItem("Connect","Yes")
@@ -97,7 +79,6 @@ function Posts(props) {
         <AddMenu 
           postlink={`/add/${id}`} 
           post={id.charAt(0).toUpperCase()+id.slice(1)} 
-          link={`/my/${id}/`}
           name={id.charAt(0).toUpperCase()+id.slice(1)}  
         />
           
@@ -116,4 +97,4 @@ function Posts(props) {
   )
 }
 
-export default Posts;
+export default MePosted;

@@ -1,11 +1,12 @@
 import { useEffect,useState } from "react"
+import HOST from "../Hosts"
 
 function Tags() {
     const [hashtags, setHashtags] = useState([])
     const token = localStorage.getItem("token")
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/hashtag/tag/',{
+        fetch(`${HOST}/hashtag/tag/`,{
           method:"GET",
           headers: {
             "Content-Type": "application/json",

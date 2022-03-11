@@ -12,7 +12,9 @@ import ViewPost from './Posts/ViewPost';
 import UserDetails from './users/Details';
 import EditProfile from './users/EditProfile';
 import Follow from './users/Follow';
-
+import Following from './users/Followings';
+import MyPost from './Posts/MyPost';
+import Notifications from './users/Notifications'
 
 function App() {
   return (
@@ -25,9 +27,12 @@ function App() {
         <Route path="/logout" element={<Logout/>} />
         <Route path="/hashtag" element={<Hashtag/>} />
         <Route path="/view/:id" element={<Posts/>} />
+        <Route path="/my/:id" element={<MyPost/>} />
         <Route path="/add/:catagory" element={<AddPost/>} />
         <Route path="/posts/:id" element={<ViewPost/>} />
         <Route path="/follow" element={<Follow/>} />
+        <Route path="/following" element={<Following/>} />
+        <Route path="/noti" element={<Notifications/>} />
       </Routes>
     </CookiesProvider>
   );

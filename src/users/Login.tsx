@@ -2,8 +2,8 @@ import { SyntheticEvent, useState } from "react";
 import { Form, Container, Button, InputGroup, FormControl } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import MyNavbar from "../components/MyNavbar";
+import HOST from "../Hosts";
 import Posts from "../Posts/Posts";
-
 
 function MyLogin(){
     const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ function MyLogin(){
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const response = await fetch('http://127.0.0.1:8000/users/login/',{
+        const response = await fetch(`${HOST}/users/login/`,{
             method:"POST",
             headers: {"Content-Type": "application/json"},
             body:JSON.stringify({

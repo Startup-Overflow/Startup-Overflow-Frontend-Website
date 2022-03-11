@@ -219,7 +219,6 @@ const EditProfile = () => {
                 <Card.Title>Set Profile as : </Card.Title>
                 <Card.Text>
                     <div className="form-check form-switch">
-
                     <input 
                         className="form-check-input" 
                         type="checkbox" 
@@ -239,7 +238,7 @@ const EditProfile = () => {
                     <input 
                         className="form-check-input" 
                         type="checkbox" 
-                        value="true" 
+                        value="true"
                         defaultChecked={userdetails.mentor}
                         onChange={e => setMentor(e.target.value)}/>
                     <label className="form-check-label">
